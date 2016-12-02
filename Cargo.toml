@@ -1,0 +1,4 @@
+[package]
+name = "specie"
+version = "0.0.1"
+authors = ["Michael Spiegel <michael.m.spiegel@gmail.com>"]
