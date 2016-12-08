@@ -1,4 +1,4 @@
-//! The 'lru' module implements a [least-recently used](
+//! The lru module implements a [least-recently used](
 //! https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_Recently_Used_.28LRU.29) cache.
 
 use std::collections::BTreeMap;
