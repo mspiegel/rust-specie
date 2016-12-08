@@ -28,10 +28,10 @@ impl<K, V> LRUCache<K, V>
         }
     }
 
-    pub fn get(&mut self, k: K) -> Option<&V> {
+    pub fn get(&mut self, key: K) -> Option<&V> {
         let now = self.clock;
-        let k = Rc::new(k);
-        let prev = match self.data.entry(k.clone()) {
+        let key = Rc::new(key);
+        let prev = match self.data.entry(key.clone()) {
             Entry::Occupied(mut e) => {
                 self.clock += 1;
                 let e = e.get_mut();
@@ -43,9 +43,9 @@ impl<K, V> LRUCache<K, V>
         };
         match prev {
             Some(t) => {
-                let key = self.order.remove(&t);
-                self.order.insert(now, key.unwrap());
-                self.data.get(k.as_ref()).as_ref().map(|x| &x.val)
+                let k = self.order.remove(&t);
+                self.order.insert(now, k.unwrap());
+                self.data.get(key.as_ref()).as_ref().map(|x| &x.val)
             }
             None => None,
         }
@@ -93,7 +93,6 @@ impl<K, V> LRUCache<K, V>
         debug_assert!(self.data.len() == self.order.len());
         self.data.len()
     }
-
 }
 
 #[test]
